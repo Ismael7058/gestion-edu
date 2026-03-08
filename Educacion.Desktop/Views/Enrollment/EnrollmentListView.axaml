@@ -1,0 +1,85 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Educacion.Desktop.ViewModels.Enrollment"
+             xmlns:models="using:Educacion.Desktop.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Educacion.Desktop.Views.Enrollment.EnrollmentListView"
+             x:DataType="vm:EnrollmentListViewModel">
+
+    <Grid RowDefinitions="Auto, *">
+        
+        <Border Grid.Row="0" Margin="0,0,0,20">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Left">
+                    <TextBlock Text="Listado de Matrículas" FontSize="22" FontWeight="Bold" Foreground="#111827"/>
+                    <TextBlock Text="Control de inscripciones y calificaciones." FontSize="14" Foreground="#6B7280"/>
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="10" VerticalAlignment="Bottom">
+                    <Button Command="{Binding CreateCommand}" 
+                            Background="#2563EB" Foreground="White" 
+                            Padding="20,10" CornerRadius="8" FontWeight="SemiBold">
+                        <Button.Styles>
+                            <Style Selector="Button:pointerover /template/ ContentPresenter">
+                                <Setter Property="Background" Value="#1D4ED8"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Style>
+                        </Button.Styles>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <PathIcon Data="{StaticResource clipboard_regular}" Width="14" Height="14"/>
+                            <TextBlock Text="Nueva Matrícula"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="White" CornerRadius="12" BoxShadow="0 4 10 0 #10000000">
+            <Grid RowDefinitions="Auto, *">
+                
+                <Border Grid.Row="0" Background="#F9FAFB" Padding="20,12" CornerRadius="12,12,0,0" BorderBrush="#E5E7EB" BorderThickness="0,0,0,1">
+                    <Grid ColumnDefinitions="40, 2*, 2*, 1*, 1*, Auto">
+                        <TextBlock Grid.Column="1" Text="ESTUDIANTE" FontSize="11" FontWeight="Bold" Foreground="#6B7280"/>
+                        <TextBlock Grid.Column="2" Text="ASIGNATURA" FontSize="11" FontWeight="Bold" Foreground="#6B7280"/>
+                        <TextBlock Grid.Column="3" Text="FECHA" FontSize="11" FontWeight="Bold" Foreground="#6B7280"/>
+                        <TextBlock Grid.Column="4" Text="NOTA" FontSize="11" FontWeight="Bold" Foreground="#6B7280"/>
+                        <TextBlock Grid.Column="5" Text="ACCIONES" FontSize="11" FontWeight="Bold" Foreground="#6B7280"/>
+                    </Grid>
+                </Border>
+
+                <ListBox Grid.Row="1" 
+                         ItemsSource="{Binding Enrollments}" 
+                         SelectedItem="{Binding SelectedEnrollment}"
+                         Background="Transparent" BorderThickness="0" Padding="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="models:Enrollment">
+                            <Grid ColumnDefinitions="40, 2*, 2*, 1*, 1*, Auto">
+                                <Border Grid.Column="0" Width="30" Height="30" Background="#E5E7EB" CornerRadius="15" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Student.FullName[0]}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Bold" Foreground="#4B5563"/>
+                                </Border>
+
+                                <TextBlock Grid.Column="1" Text="{Binding Student.FullName}" VerticalAlignment="Center" FontWeight="Medium" Foreground="#111827"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Subject.Name}" VerticalAlignment="Center" Foreground="#6B7280"/>
+                                <TextBlock Grid.Column="3" Text="{Binding EnrollmentDate, StringFormat='dd/MM/yyyy'}" VerticalAlignment="Center" Foreground="#6B7280"/>
+                                <TextBlock Grid.Column="4" Text="{Binding Grade, TargetNullValue='-'}" VerticalAlignment="Center" FontWeight="Bold" Foreground="#111827"/>
+
+                                <StackPanel Grid.Column="5" Orientation="Horizontal" Spacing="8">
+                                    <Button Command="{Binding $parent[UserControl].((vm:EnrollmentListViewModel)DataContext).EditCommand}"
+                                            Background="Transparent" BorderThickness="0" Padding="4">
+                                        <PathIcon Data="{StaticResource clipboard_regular}" Width="14" Foreground="#2563EB"/>
+                                    </Button>
+                                    <Button Command="{Binding $parent[UserControl].((vm:EnrollmentListViewModel)DataContext).DeleteCommand}"
+                                            Background="Transparent" BorderThickness="0" Padding="4">
+                                        <PathIcon Data="{StaticResource clipboard_regular}" Width="14" Foreground="#DC2626"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

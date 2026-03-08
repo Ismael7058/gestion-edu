@@ -1,0 +1,21 @@
+# Directorios de compilación y salida
+[Bb]in/
+[Oo]bj/
+
+# Archivos específicos de usuario y configuración de Visual Studio
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# Visual Studio Code
+.vscode/
+
+# Base de datos SQLite (Visto en EducacionDbContext.cs)
+*.db
+*.db-shm
+*.db-wal
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db

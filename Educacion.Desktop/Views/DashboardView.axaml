@@ -1,0 +1,100 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Educacion.Desktop.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Educacion.Desktop.Views.DashboardView"
+             x:DataType="vm:DashboardViewModel">
+
+    <Grid RowDefinitions="Auto, *">
+        <StackPanel Grid.Row="0" Margin="0,0,0,30">
+            <TextBlock Text="Panel de Control" FontSize="24" FontWeight="Bold" Foreground="#111827"/>
+            <TextBlock Text="Seleccione una acción rápida para comenzar." FontSize="14" Foreground="#6B7280" Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <UniformGrid Grid.Row="1" Columns="2" Rows="2">
+            <!-- Estilo para las tarjetas -->
+            <UniformGrid.Styles>
+                <Style Selector="Button.card">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="CornerRadius" Value="12"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Padding" Value="20"/>
+                    <Setter Property="Template">
+                        <ControlTemplate>
+                            <Border Background="{TemplateBinding Background}" 
+                                    CornerRadius="{TemplateBinding CornerRadius}"
+                                    BoxShadow="0 4 6 -1 #10000000, 0 2 4 -1 #06000000">
+                                <ContentPresenter Content="{TemplateBinding Content}" 
+                                                  HorizontalAlignment="Center" 
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter>
+                </Style>
+                <Style Selector="Button.card:pointerover">
+                    <Setter Property="RenderTransform" Value="scale(1.02)"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Style>
+                <Style Selector="Button.card > StackPanel > PathIcon">
+                    <Setter Property="Width" Value="40"/>
+                    <Setter Property="Height" Value="40"/>
+                    <Setter Property="Margin" Value="0,0,0,15"/>
+                </Style>
+                <Style Selector="Button.card > StackPanel > TextBlock.title">
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="Foreground" Value="#111827"/>
+                    <Setter Property="TextAlignment" Value="Center"/>
+                </Style>
+                <Style Selector="Button.card > StackPanel > TextBlock.desc">
+                    <Setter Property="FontSize" Value="13"/>
+                    <Setter Property="Foreground" Value="#6B7280"/>
+                    <Setter Property="TextAlignment" Value="Center"/>
+                    <Setter Property="Margin" Value="0,5,0,0"/>
+                </Style>
+            </UniformGrid.Styles>
+
+            <!-- Tarjeta Estudiante -->
+            <Button Classes="card" Command="{Binding CreateStudentCommand}">
+                <StackPanel>
+                    <PathIcon Data="{StaticResource people_regular}" Foreground="#2563EB"/>
+                    <TextBlock Classes="title" Text="Nuevo Estudiante"/>
+                    <TextBlock Classes="desc" Text="Registrar un nuevo alumno en el sistema"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Tarjeta Profesor -->
+            <Button Classes="card" Command="{Binding CreateTeacherCommand}">
+                <StackPanel>
+                    <PathIcon Data="{StaticResource person_board_regular}" Foreground="#7C3AED"/>
+                    <TextBlock Classes="title" Text="Nuevo Profesor"/>
+                    <TextBlock Classes="desc" Text="Dar de alta a un nuevo docente"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Tarjeta Asignatura -->
+            <Button Classes="card" Command="{Binding CreateSubjectCommand}">
+                <StackPanel>
+                    <PathIcon Data="{StaticResource book_regular}" Foreground="#059669"/>
+                    <TextBlock Classes="title" Text="Nueva Asignatura"/>
+                    <TextBlock Classes="desc" Text="Crear una nueva materia o curso"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Tarjeta Matrícula -->
+            <Button Classes="card" Command="{Binding CreateEnrollmentCommand}">
+                <StackPanel>
+                    <PathIcon Data="{StaticResource clipboard_regular}" Foreground="#D97706"/>
+                    <TextBlock Classes="title" Text="Nueva Matrícula"/>
+                    <TextBlock Classes="desc" Text="Inscribir a un alumno en una asignatura"/>
+                </StackPanel>
+            </Button>
+
+        </UniformGrid>
+    </Grid>
+</UserControl>

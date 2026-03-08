@@ -1,0 +1,97 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Educacion.Desktop.ViewModels.Student"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="600"
+             x:Class="Educacion.Desktop.Views.Student.StudentDetailView"
+             x:DataType="vm:StudentDetailViewModel"
+             Background="Transparent">
+
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Border Background="White" 
+                CornerRadius="16" 
+                Padding="30" 
+                Width="450"
+                BoxShadow="0 8 20 0 #15000000">
+            
+            <StackPanel Spacing="20">
+                <StackPanel Spacing="5" Margin="0,0,0,10">
+                    <TextBlock Text="Información del Estudiante" 
+                               FontSize="20" 
+                               FontWeight="SemiBold" 
+                               Foreground="#111827"/>
+                    <TextBlock Text="Complete los campos para registrar o actualizar al alumno." 
+                               FontSize="12" 
+                               Foreground="#6B7280"
+                               TextWrapping="Wrap"/>
+                </StackPanel> <UniformGrid Columns="1">
+                    <StackPanel Spacing="6">
+                        <Label Content="Nombre" FontSize="13" FontWeight="Medium" Foreground="#374151"/>
+                        <TextBox Text="{Binding FirstName}" 
+                                 Watermark="Ej: Juan" 
+                                 Padding="10,8"
+                                 CornerRadius="6"/>
+                    </StackPanel>
+
+                    <StackPanel Spacing="6" Margin="0,15,0,0">
+                        <Label Content="Apellidos" FontSize="13" FontWeight="Medium" Foreground="#374151"/>
+                        <TextBox Text="{Binding LastName}" 
+                                 Watermark="Ej: Pérez" 
+                                 Padding="10,8"
+                                 CornerRadius="6"/>
+                    </StackPanel>
+
+                    <StackPanel Spacing="6" Margin="0,15,0,0">
+                        <Label Content="Correo Electrónico" FontSize="13" FontWeight="Medium" Foreground="#374151"/>
+                        <TextBox Text="{Binding Email}" 
+                                 Watermark="juan.perez@ejemplo.com" 
+                                 Padding="10,8"
+                                 CornerRadius="6"/>
+                    </StackPanel>
+
+                    <StackPanel Spacing="6" Margin="0,15,0,0">
+                        <Label Content="Fecha de Nacimiento" FontSize="13" FontWeight="Medium" Foreground="#374151"/>
+                        <DatePicker SelectedDate="{Binding DateOfBirth}" 
+                                    HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                </UniformGrid>
+
+                <Grid ColumnDefinitions="*, *" Margin="0,20,0,0">
+                    <Button Grid.Column="0" 
+                            Content="Cancelar" 
+                            Command="{Binding CancelCommand}"
+                            HorizontalAlignment="Left"
+                            Background="Transparent"
+                            Foreground="#6B7280"
+                            Padding="20,10"
+                            BorderThickness="0">
+                        <Button.Styles>
+                            <Style Selector="Button:pointerover /template/ ContentPresenter">
+                                <Setter Property="Background" Value="#F3F4F6"/>
+                                <Setter Property="Foreground" Value="#374151"/>
+                            </Style>
+                        </Button.Styles>
+                    </Button>
+                    
+                    <Button Grid.Column="1" 
+                            Content="Guardar Alumno" 
+                            Command="{Binding SaveCommand}"
+                            HorizontalAlignment="Right"
+                            Background="#2563EB"
+                            Foreground="White"
+                            FontWeight="SemiBold"
+                            Padding="25,10"
+                            CornerRadius="8">
+                        <Button.Styles>
+                            <Style Selector="Button:pointerover /template/ ContentPresenter">
+                                <Setter Property="Background" Value="#1D4ED8"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Style>
+                        </Button.Styles>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

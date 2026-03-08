@@ -1,0 +1,113 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Educacion.Desktop.ViewModels"
+        x:Class="Educacion.Desktop.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Sistema de Gestión Educativa"
+        Width="1150" Height="750"
+        WindowStartupLocation="CenterScreen"
+        Background="#F3F4F6"
+        TransparencyLevelHint="AcrylicBlur"
+        ExtendClientAreaToDecorationsHint="True">
+
+    <Window.Resources>
+        <StreamGeometry x:Key="home_regular">M3,9l9-7l9,7v11a2,2 0 0,1-2,2H5a2,2 0 0,1-2-2V9z</StreamGeometry>
+        <StreamGeometry x:Key="people_regular">M16,13C15.71,13 15.38,13 15.03,13.05C16.19,13.89 17,15 17,16.5V19H23V16.5C23,14.17 18.33,13 16,13M8,13C5.67,13 1,14.17 1,16.5V19H15V16.5C15,14.17 10.33,13 8,13M8,11A3,3 0 0,0 11,8A3,3 0 0,0 8,5A3,3 0 0,0 5,8A3,3 0 0,0 8,11M16,11A3,3 0 0,0 19,8A3,3 0 0,0 16,5A3,3 0 0,0 13,8A3,3 0 0,0 16,11Z</StreamGeometry>
+        <StreamGeometry x:Key="person_board_regular">M18,19H6V17.6C6,15.6 10,14.5 12,14.5C14,14.5 18,15.6 18,17.6M12,7A3,3 0 0,1 15,10A3,3 0 0,1 12,13A3,3 0 0,1 9,10A3,3 0 0,1 12,7M12,3A1,1 0 0,1 13,4V5H15A2,2 0 0,1 17,7V19A2,2 0 0,1 15,21H9A2,2 0 0,1 7,19V7A2,2 0 0,1 9,5H11V4A1,1 0 0,1 12,3Z</StreamGeometry>
+        <StreamGeometry x:Key="book_regular">M18,22A2,2 0 0,0 20,20V4C20,2.89 19.1,2 18,2H12V9L9.5,7.5L7,9V2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18Z</StreamGeometry>
+        <StreamGeometry x:Key="clipboard_regular">M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z</StreamGeometry>
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="Button.nav">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Foreground" Value="#4B5563"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        
+        <Style Selector="Button.nav:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#F3F4F6"/>
+            <Setter Property="Foreground" Value="#2563EB"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid ColumnDefinitions="260, *">
+        
+        <Border Grid.Column="0" Background="White" BorderBrush="#E5E7EB" BorderThickness="0,0,1,0">
+            <Grid RowDefinitions="Auto, *, Auto" Margin="24, 48, 24, 24">
+                
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12" Margin="0,0,0,32">
+                    <Border Width="36" Height="36" Background="#2563EB" CornerRadius="10">
+                        <PathIcon Data="{StaticResource book_regular}" Width="18" Height="18" Foreground="White"/>
+                    </Border>
+                    <TextBlock Text="EduGestión" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Foreground="#111827"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Spacing="4" Classes="Sidebar">
+                    <TextBlock Text="PRINCIPAL" FontSize="11" FontWeight="ExtraBold" Foreground="#9CA3AF" Margin="10,0,0,12" LetterSpacing="1"/>
+                    
+                    <Button Classes="nav" Command="{Binding NavigateToDashboardCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <PathIcon Data="{StaticResource home_regular}" Width="18" Height="18"/>
+                            <TextBlock Text="Inicio" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Classes="nav" Command="{Binding NavigateToStudentsCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <PathIcon Data="{StaticResource people_regular}" Width="18" Height="18"/>
+                            <TextBlock Text="Estudiantes" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <Button Classes="nav" Command="{Binding NavigateToTeachersCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <PathIcon Data="{StaticResource person_board_regular}" Width="18" Height="18"/>
+                            <TextBlock Text="Profesores" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <Button Classes="nav" Command="{Binding NavigateToSubjectsCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <PathIcon Data="{StaticResource book_regular}" Width="18" Height="18"/>
+                            <TextBlock Text="Asignaturas" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <Button Classes="nav" Command="{Binding NavigateToEnrollmentsCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <PathIcon Data="{StaticResource clipboard_regular}" Width="18" Height="18"/>
+                            <TextBlock Text="Matrículas" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1" RowDefinitions="Auto, *">
+            
+            <Border Grid.Row="0" Height="70" Background="White" Padding="32,0" BorderBrush="#E5E7EB" BorderThickness="0,0,0,1">
+                <DockPanel LastChildFill="False">
+                </DockPanel>
+            </Border>
+
+            <TransitioningContentControl Grid.Row="1" 
+                                         Content="{Binding CurrentViewModel}" 
+                                         Padding="32">
+                <TransitioningContentControl.PageTransition>
+                    <CrossFade Duration="0:0:0.3" />
+                </TransitioningContentControl.PageTransition>
+            </TransitioningContentControl>
+        </Grid>
+    </Grid>
+</Window>
